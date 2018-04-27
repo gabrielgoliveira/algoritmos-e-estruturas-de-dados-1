@@ -25,9 +25,14 @@ int main(){
     imprimeMatriz(matrizA, n);
     printf("\n");
     imprimeMatriz(matrizB, n);
+
     matrizC = MultMatrizNxN(matrizA, matrizB, n);
     printf("\n");
     imprimeMatriz(matrizC, n);
+    printf("O algoritmo gastou: %d passos para gerar a matriz\n", n*n*n);
+    /*
+    Na função onde é feita a multiplicação das matrizes a complexidade é n^3
+    */
     // Liberar Memoria Alocada
     liberarMatriz(matrizA, n);
     liberarMatriz(matrizB, n);
@@ -38,7 +43,6 @@ int** alocaMatriz(int n){
     int **matriz;
     int i, j;
     matriz = (int**) malloc(n*sizeof(int*));
-    srand(time(NULL));
     for(i=0;i<n;i++){
         matriz[i] = (int*) malloc(n*sizeof(int));
         for(j=0;j<n;j++){
@@ -66,8 +70,11 @@ int** MultMatrizNxN(int **matrizA, int **matrizB, int n){
     int **matrizC;
     int i, j, k;
     matrizC = alocaMatriz(n);
+    /*Complexidade n^3*/
     for(i=0;i<n;i++){
         for(j=0;j<n;j++){
+            // zerando matriz pois na aloca matriz ela recebe valores aleatorios
+            matrizC[i][j]=0;
             for(k=0;k<n;k++){
                 matrizC[i][j] += matrizA[i][k]*matrizB[k][j]; 
             }
