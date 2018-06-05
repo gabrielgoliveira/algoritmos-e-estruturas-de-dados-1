@@ -1,49 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
+//implementação do tipo abstrato de tados lista.h
 
-struct Inimigos {
-	int x;
-	struct Inimigos *prox;
-};
-typedef struct Inimigos inimigos;
+#include "lista.h" //incluindo o arquivo de cabeçalho
 
-//prototipagem das funções
-inimigos* criarLista();
-void criarNoFinal(inimigos *Head);
-void imprimirLista(inimigos *Head);
-void operacao(char, inimigos *);
-int insercaoAposX(int, int, inimigos *);
-int removeX(int, inimigos *);
-int quantidadeEntreAeB(int, int, inimigos*);
+/* Depois de incluir o arquivo lista.h
+esse arquivo vai enchergar tudo que está nele*/
 
-int main(){
-	inimigos *lista;
-	int n, i, aux;
-	char c;
-
-	lista = criarLista();
-	//printf("Insira a Quantidade de Nos Iniciais: ");
-	scanf("%d", &n);
-	//inserindo n nós na lista
-	//printf("Insira os Nos: \n");
-	for(i=0;i<n;i++){
-		criarNoFinal(lista);
-	}
-	//lendo as operações
-	do{	
-		/*
-		printf("Operacoes: \n");
-		printf("I - Inserir (pessoa, elemento)\nR - Remova Inimigo e\nQ - Quantidade Inimigos Entre A e B\nOp: ");
-		*/
-		scanf(" %c", &c);
-		operacao(c, lista);
-		//imprimirLista(lista);
-	}while(c != 'F');
-	
-
-	return 0;
-}
-//definições
 inimigos* criarLista(){
 	inimigos *Head = NULL;
 	Head = (inimigos*) malloc(sizeof(inimigos));
