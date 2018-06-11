@@ -65,18 +65,13 @@ char obtemTopoDaPilha(Pilha *pilha){
  
  
 bool checkSeEvalida(){
-    Pilha *pilha = NULL;
-    pilha = (Pilha*) malloc(sizeof(Pilha));
-    
     int i, qtd = 0;
     for(i = 0; i < strlen(str); i++){
-        if( str[i] == '(' ) insereNoTopoDaPilha(pilha, '(');
-        else if( str[i] == ')' ){
-            if( pilhaVazia(pilha) || obtemTopoDaPilha(pilha) != '(' ) return false;
-            removeDoTopoDaPilha(pilha);
-        }
+        if( str[i] == '(' ) qtd++;
+        else if( str[i] == ')' ) qtd--;
+        if( qtd < 0 ) return false;
     }
-    return pilhaVazia(pilha);
+    return (qtd == 0);
 }
  
 int main(){
@@ -92,9 +87,10 @@ int main(){
     pilha = (Pilha*) malloc(sizeof(Pilha));
     bool flag = false;
     while(scanf("%s", str) != EOF){
-        //if( flag ) printf("\n");
+        if( flag ) printf("\n");
         printf("%s\n", str);
         bool ok = false;
+        flag = true;
         if( checkSeEvalida() ){
             for(i = 0; i < strlen(str); i++){
                 if( str[i] == '(' ){
@@ -133,10 +129,10 @@ int main(){
                 printf("%c", obtemTopoDaPilha(pilha));
                 removeDoTopoDaPilha(pilha);
             }
-            printf("\n\n");
+            printf("\n");
         }
         else{
-            printf("Expressao invalida\n\n");
+            printf("Expressao invalida\n");
         }
     }
 }
